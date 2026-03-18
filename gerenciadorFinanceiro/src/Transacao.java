@@ -3,15 +3,13 @@ import java.time.LocalDate;
 public class Transacao {
 
     private final int id;
-    private String descricao;
-    private double valor;
+    private int valor;
     private int idCategoria;
     private LocalDate data;
     private String tipo; // "receita" ou "despesa"
 
-    public Transacao(int id, String descricao, double valor, int idCategoria, LocalDate data, String tipo) {
+    public Transacao(int id, int valor, int idCategoria, LocalDate data, String tipo) {
         this.id = id;
-        this.descricao = descricao;
         this.valor = valor;
         this.idCategoria = idCategoria;
         this.data = data;
@@ -22,19 +20,11 @@ public class Transacao {
         return id;
     }
 
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
     public double getValor() {
         return valor;
     }
 
-    public void setValor(double valor) {
+    public void setValor(int valor) {
         this.valor = valor;
     }
 
@@ -64,7 +54,7 @@ public class Transacao {
 
     @Override
     public String toString() {
-        return "Transacao{id=" + id + ", descricao='" + descricao + "', valor=" + valor +
+        return "Transacao{id=" + id + ", valor=" + valor +
                 ", categoria=" + idCategoria + ", data=" + data + "}";
     }
 }

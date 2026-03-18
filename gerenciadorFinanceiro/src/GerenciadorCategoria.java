@@ -13,6 +13,7 @@ public class GerenciadorCategoria {
 
     public GerenciadorCategoria() {
         this.categorias = new ArrayList<>();
+        carregarCategoriasDeArquivo();
     }
 
     public void salvarCategoriaEmArquivo(Categoria categoria) {
