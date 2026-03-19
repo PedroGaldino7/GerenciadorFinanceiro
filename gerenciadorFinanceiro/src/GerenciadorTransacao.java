@@ -10,9 +10,11 @@ import java.time.LocalDate;
 public class GerenciadorTransacao {
     
     private List<Transacao> transacoes;
+    private GerenciadorCategoria gerenciadorCategoria;
 
-    public GerenciadorTransacao() {
+    public GerenciadorTransacao(GerenciadorCategoria gerenciadorCategoria) {
         this.transacoes = new ArrayList<>();
+        this.gerenciadorCategoria = gerenciadorCategoria;
         carregarTransacoesDeArquivo();
     }
 
@@ -28,7 +30,7 @@ public class GerenciadorTransacao {
         } 
         
         catch (IOException e) {
-            System.out.println("Erro ao salvar transação: " + e.getMessage());
+            System.out.println("Erro ao salvar transacao: " + e.getMessage());
         }
     }
 
@@ -47,29 +49,85 @@ public class GerenciadorTransacao {
                 transacoes.add(transacao);
             }
         } catch (IOException e) {
-            System.out.println("Erro ao carregar transações: " + e.getMessage());
+            System.out.println("Erro ao carregar transacoes: " + e.getMessage());
         }
     }
 
-    public void atualizarTransacaoEmArquivo(Transacao transacao) {
+    public void atualizarTransacaoEmArquivo() {
         try (FileWriter writer = new FileWriter("transacoes.txt")) {
-            writer.write(
-                transacao.getId() + ";" +
-                transacao.getValor() + ";" +
-                transacao.getData() + ";" +
-                transacao.getIdCategoria() + ";" +
-                transacao.getTipo() + "\n"
-            );
+            for (Transacao transacao : transacoes) {
+                writer.write(
+                    transacao.getId() + ";" +
+                    transacao.getValor() + ";" +
+                    transacao.getIdCategoria() + ";" +
+                    transacao.getData() + ";" +
+                    transacao.getTipo() + "\n"
+                );
+            }
         } 
         
         catch (IOException e) {
-            System.out.println("Erro ao salvar transação: " + e.getMessage());
+            System.out.println("Erro ao salvar transacao: " + e.getMessage());
+        }
+    }
+
+    public void apagarArquivoTransacoes(){
+        File file = new File("transacoes.txt");
+        if (file.exists()) {
+            if (file.delete()) {
+                System.out.println("Arquivo de transacoes apagado com sucesso.");
+            } else {
+
+            }
         }
     }
 
     public void adicionarTransacao(Transacao transacao) {
         transacoes.add(transacao);
         salvarTransacaoEmArquivo(transacao);
+    }
+
+    public boolean removerTransacao(int id){
+        boolean removido = transacoes.removeIf(
+            t -> t.getId() == id
+        );
+
+        if(removido){
+            if (transacoes.isEmpty()) {
+                apagarArquivoTransacoes();
+            }else{
+                atualizarTransacaoEmArquivo();
+            }
+        }
+        return removido;
+    }
+
+    public void listarTransacoes(){
+
+        if (transacoes.isEmpty()) {
+            System.out.println("Nenhuma transacao cadastrada.");
+            return;
+        }
+
+        for(Transacao transacao : transacoes){
+            System.out.println(
+                "Id: "+ transacao.getId() +
+                ", Valor: " + transacao.getValor() +
+                ", Categoria: " + buscarNomeDaCategoriaPorId(transacao.getIdCategoria()) +
+                ", Data: " + transacao.getData() +
+                ", Tipo: " + transacao.getTipo()
+            );
+        }
+    }
+
+    public String buscarNomeDaCategoriaPorId(int idCat){
+        Categoria categoria = gerenciadorCategoria.buscarCategoriaPorId(idCat);
+
+        if (categoria != null) {
+            return categoria.getNome();
+        } else {
+            return "Categoria não encontrada";
+        }
     }
 
     public List<Transacao> getTransacoes() {
