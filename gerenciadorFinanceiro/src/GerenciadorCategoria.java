@@ -85,6 +85,7 @@ public class GerenciadorCategoria {
             }
         }
 
+        System.out.println(removido ? "Categoria excluida com sucesso!" : "Categoria nao encontrada.");
         return removido;
     }
 
@@ -115,9 +116,9 @@ public class GerenciadorCategoria {
 
         if (file.exists()) {
             if (file.delete()) {
-                System.out.println("Arquivo de categorias apagado com sucesso.");
+                
             } else {
-
+                System.out.println("Erro ao apagar arquivo de categorias.");
             }
         }
     }
