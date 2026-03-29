@@ -1,2 +1,0 @@
-1;Compras
-2;Salario

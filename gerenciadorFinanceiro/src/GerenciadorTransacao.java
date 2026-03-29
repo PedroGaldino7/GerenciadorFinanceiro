@@ -94,13 +94,13 @@ public class GerenciadorTransacao {
             return;
         }
 
+        System.out.println("Lista de Transacoes:");
         for(Transacao transacao : transacoes){
-            System.out.println(
-                "Id: "+ transacao.getId() +
-                ", Valor: " + transacao.getValor() +
-                ", Categoria: " + buscarNomeDaCategoriaPorId(transacao.getIdCategoria()) +
-                ", Data: " + transacao.getData() +
-                ", Tipo: " + transacao.getTipo()
+            System.out.println( 
+                "Categoria: " + buscarNomeDaCategoriaPorId(transacao.getIdCategoria()) +
+                "; Tipo: " + transacao.getTipo() +
+                "; Valor: " + String.format("%.2f", transacao.getValor()) + "R$" +
+                "; Data: " + transacao.getData() 
             );
         }
     }

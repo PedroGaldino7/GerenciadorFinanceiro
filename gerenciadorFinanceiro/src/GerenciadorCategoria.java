@@ -85,11 +85,24 @@ public class GerenciadorCategoria {
             }
         }
 
-        System.out.println(removido ? "Categoria excluida com sucesso!" : "Categoria nao encontrada.");
+        System.out.println(removido ? "Categoria excluida com sucesso!" : "Categoria nao encontrada, aperte enter para continuar.");
         return removido;
     }
 
     public void listarCategorias() {
+
+        if (categorias.isEmpty()) {
+            System.out.println("Nenhuma categoria cadastrada.");
+            return;
+
+        } 
+    
+        for (Categoria categoria : categorias) {
+            System.out.println("Nome: " + categoria.getNome());
+        }
+    }
+
+    public void listarCategoriasComIds() {
 
         if (categorias.isEmpty()) {
             System.out.println("Nenhuma categoria cadastrada.");

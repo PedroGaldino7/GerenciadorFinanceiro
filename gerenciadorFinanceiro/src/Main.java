@@ -93,7 +93,7 @@ public class Main {
 
                             case 3:
                                 limparTela();
-                                gerenciadorCategoria.listarCategorias();
+                                gerenciadorCategoria.listarCategoriasComIds();
 
                                 if (gerenciadorCategoria.getCategorias().isEmpty()) {
                                     System.out.println("Pressione enter para voltar ao menu...");
@@ -116,7 +116,7 @@ public class Main {
                                 sc.nextLine();
                         }
                     }while (opC != 0);
-                    break;
+                break;
 
                 case 2:
                     limparTela();
@@ -143,14 +143,14 @@ public class Main {
                                 } else if (tipo == 2) {
                                     tipoEscolhido = "Despesa";
                                 }else {
-                                    System.out.println("Tipo invalido! Pressione Enter para tentar novamente...");
+                                    System.out.println("Tipo invalido! Pressione Enter para continuar...");
                                     sc.nextLine();
                                     break;
                                 }
                             
                             limparTela();
                             System.out.println("Escolha a categoria:");
-                            gerenciadorCategoria.listarCategorias();
+                            gerenciadorCategoria.listarCategoriasComIds();
 
                                 if (gerenciadorCategoria.getCategorias().isEmpty()) {
                                     System.out.println("Pressione enter para voltar ao menu...");
@@ -162,7 +162,7 @@ public class Main {
                             Categoria categoriaEscolhida = gerenciadorCategoria.buscarCategoriaPorId(idCategoria);
 
                                 if (categoriaEscolhida == null) {
-                                    System.out.println("Categoria nao encontrada! Pressione Enter para tentar novamente...");
+                                    System.out.println("Categoria nao encontrada! Pressione Enter para continuar...");
                                     sc.nextLine();
                                     break;
                                 }
@@ -207,6 +207,7 @@ public class Main {
                     sc.nextLine();
             }
         } while (op != 0);
+        limparTela();
         sc.close();
     }
 }
