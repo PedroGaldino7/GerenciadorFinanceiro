@@ -41,7 +41,7 @@ public class GerenciadorTransacao {
             while ((line = reader.readLine()) != null) {
                 String[] parts = line.split(";");
                 int id = Integer.parseInt(parts[0]);
-                int valor = Integer.parseInt(parts[1]);
+                double valor = Double.parseDouble(parts[1]);
                 int idCategoria = Integer.parseInt(parts[2]);
                 LocalDate data = LocalDate.parse(parts[3]);
                 String tipo = parts[4];
@@ -85,21 +85,6 @@ public class GerenciadorTransacao {
     public void adicionarTransacao(Transacao transacao) {
         transacoes.add(transacao);
         salvarTransacaoEmArquivo(transacao);
-    }
-
-    public boolean removerTransacao(int id){
-        boolean removido = transacoes.removeIf(
-            t -> t.getId() == id
-        );
-
-        if(removido){
-            if (transacoes.isEmpty()) {
-                apagarArquivoTransacoes();
-            }else{
-                atualizarTransacaoEmArquivo();
-            }
-        }
-        return removido;
     }
 
     public void listarTransacoes(){

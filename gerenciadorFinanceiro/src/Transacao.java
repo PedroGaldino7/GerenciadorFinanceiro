@@ -3,12 +3,12 @@ import java.time.LocalDate;
 public class Transacao {
 
     private final int id;
-    private int valor;
+    private double valor;
     private int idCategoria;
     private LocalDate data;
     private String tipo; // "receita" ou "despesa"
 
-    public Transacao(int id, int valor, int idCategoria, LocalDate data, String tipo) {
+    public Transacao(int id, double valor, int idCategoria, LocalDate data, String tipo) {
         this.id = id;
         this.valor = valor;
         this.idCategoria = idCategoria;
